@@ -62,14 +62,14 @@ function settingsBillTotal() {
 
     callSettings.innerHTML = callSet.toFixed(2);
     smsSettings.innerHTML = smsSet.toFixed(2);
-    var costs = callSet + smsSet;
+    var costz = callSet + smsSet;
     total.innerHTML = costs.toFixed(2);
 
-    if (costs >= critical1) {
+    if (costz >= critical1) {
         
         total.classList.add("danger");
     }
-    else if (costs >= warning1) {
+    else if (costz >= warning1) {
 
         total.classList.add("warning");
     }
