@@ -34,17 +34,17 @@ function calculateBtnClicked() {
     var roundedBillTotal = billTotal.toFixed(2);
     billTotalElement.innerHTML = roundedBillTotal;
   
-    roundedBillTotal.classList.remove("warning")
-    roundedBillTotal.classList.remove("danger")
+    billTotalElement.classList.remove("warning")
+    billTotalElement.classList.remove("danger")
 
 
-    if (roundedBillTotal.innerHTML >= 30) {
+    if (billTotalElement.innerHTML >= 30) {
 
-        roundedBillTotal.classList.add("danger");
+        billTotalElement.classList.add("danger");
 
-    } else if (roundedBillTotal.innerHTML >= 20) {
+    } else if (billTotalElement.innerHTML >= 20) {
 
-        roundedBillTotal.classList.add("warning");
+        billTotalElement.classList.add("warning");
         
     }
 }
