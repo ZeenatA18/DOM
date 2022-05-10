@@ -6,8 +6,8 @@ const total = document.querySelector(".totalSettings");
 // get refences to all the settings fields
 const callSetting = document.querySelector(".callCostSetting");
 const smsSetting = document.querySelector(".smsCostSetting");
-const warning = document.querySelector(".warningLevelSetting");
-const critical = document.querySelector(".criticalLevelSetting")
+const warnings = document.querySelector(".warningLevelSetting");
+const criticals = document.querySelector(".criticalLevelSetting")
 
 //get a reference to the add button
 const checkedbuttonAdd = document.querySelector(".billSettingBtn")
@@ -17,18 +17,24 @@ const updateBtn = document.querySelector(".updateSettings")
 
 // create a variables that will keep track of all the settings
 var call = 0
-var sms = 0 
+var sms = 0
 var warning1 = 0
 var critical1 = 0
 
 // create a variables that will keep track of all three totals.
-var callSet = 0
+var callSet = 0;
 var smsSet = 0
-var totals = 0
 
 //add an event listener for when the 'Update settings' button is pressed
+updateBtn.addEventListener("click", function () {
+    call = Number(callSetting.value);
+    sms = Number(smsSetting.value);
+    warning1 = Number(warnings.value);
+    critical1 = Number(criticals.value);
+})
 
 //add an event listener for when the add button is pressed
+checkedbuttonAdd.addEventListener('click', settingsBillTotal)
 
 //in the event listener get the value from the billItemTypeRadio radio buttons
 // * add the appropriate value to the call / sms total
@@ -42,16 +48,30 @@ function settingsBillTotal() {
     // get the value entered in the billType textfield
 
     var checkedbuttonAdd = document.querySelector("input[name='billItemTypeWithSettings']:checked");
+
     if (checkedbuttonAdd) {
-        var billItemType = (checkedbuttonAdd.value).toLowerCase();
+        var billItemTypeWithSettings = (checkedbuttonAdd.value).toLowerCase();
 
-        // billItemType will be 'call' or 'sms'
-
-        if (billItemType === "call") {
-            call += 2.75
+        if (billItemTypeWithSettings === "call") {
+            callSet += call
         }
-        else if (billItemType === "sms") {
-            sms += 0.75;
+        else if (billItemTypeWithSettings === "sms") {
+            smsSet += sms
         }
     }
+
+    callSettings.innerHTML = callSet.toFixed(2);
+    smsSettings.innerHTML = smsSet.toFixed(2);
+    var costs = callSet + smsSet;
+    total.innerHTML = costs.toFixed(2);
+
+    if (costs >= critical1) {
+        
+        total.classList.add("danger");
+    }
+    else if (costs >= warning1) {
+
+        total.classList.add("warning");
+    }
+
 }
