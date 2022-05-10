@@ -42,7 +42,7 @@ function radioBillTotal() {
     smsTotals.innerHTML = smsTotal1.toFixed(2);
 
     var totalCost = callsTotal1 + smsTotal1;
-    console.log(totalCosts)
+    // console.log(totalCosts)
     totalCosts.innerHTML = totalCost.toFixed(2);
 
     if (totalCost >= 50) {
