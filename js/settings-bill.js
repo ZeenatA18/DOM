@@ -7,13 +7,13 @@ const total = document.querySelector(".totalSettings");
 const callSetting = document.querySelector(".callCostSetting");
 const smsSetting = document.querySelector(".smsCostSetting");
 const warnings = document.querySelector(".warningLevelSetting");
-const criticals = document.querySelector(".criticalLevelSetting")
+const criticals = document.querySelector(".criticalLevelSetting");
 
 //get a reference to the add button
-const checkedbuttonAdd = document.querySelector(".billSettingBtn")
+const buttonAdd = document.querySelector(".billSettingBtn");
 
 //get a reference to the 'Update settings' button
-const updateBtn = document.querySelector(".updateSettings")
+const updateBtn = document.querySelector(".updateSettings");
 
 // create a variables that will keep track of all the settings
 var call = 0
@@ -31,10 +31,18 @@ updateBtn.addEventListener("click", function () {
     sms = Number(smsSetting.value);
     warning1 = Number(warnings.value);
     critical1 = Number(criticals.value);
+    if (Number(total.innerHTML) < Number(critical1)){
+        buttonAdd.disabled = false;
+    }
+
+
+    total.classList.remove("warning")
+    total.classList.remove("danger")
+
 })
 
 //add an event listener for when the add button is pressed
-checkedbuttonAdd.addEventListener('click', settingsBillTotal)
+buttonAdd.addEventListener('click', settingsBillTotal)
 
 //in the event listener get the value from the billItemTypeRadio radio buttons
 // * add the appropriate value to the call / sms total
@@ -52,10 +60,10 @@ function settingsBillTotal() {
     if (checkedbuttonAdd) {
         var billItemTypeWithSettings = (checkedbuttonAdd.value).toLowerCase();
 
-        if (billItemTypeWithSettings === "call") {
+        if (billItemTypeWithSettings === "call" ) {
             callSet += call
         }
-        else if (billItemTypeWithSettings === "sms") {
+        else if (billItemTypeWithSettings === "sms" ) {
             smsSet += sms
         }
     }
@@ -64,14 +72,27 @@ function settingsBillTotal() {
     smsSettings.innerHTML = smsSet.toFixed(2);
     var costs = callSet + smsSet;
     total.innerHTML = costs.toFixed(2);
+  
 
     if (costs >= critical1) {
         
         total.classList.add("danger");
+
+        total.classList.remove("warning")
+
     }
     else if (costs >= warning1) {
 
         total.classList.add("warning");
+
+        total.classList.remove("danger")
+
     }
+    // console.log(typeof checkedbuttonAdd.disabled)
+    if (Number(costs) >= Number(critical1)){
+        buttonAdd.disabled = true;
+    }
+
+   
 
 }
