@@ -31,10 +31,10 @@ updateBtn.addEventListener("click", function () {
     sms = Number(smsSetting.value);
     warning1 = Number(warnings.value);
     critical1 = Number(criticals.value);
+    
     if (Number(total.innerHTML) < Number(critical1)){
         buttonAdd.disabled = false;
     }
-
 
     total.classList.remove("warning")
     total.classList.remove("danger")
